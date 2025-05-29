@@ -1,0 +1,10 @@
+{
+  "name": "microservice-starter",
+  "type": "service",
+  "registry": "YOUR_AWS_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com",
+  "repo": "your-microservice-name",
+  "environments": {
+    "production": "YOUR_PRODUCTION_WORKSPACE_ID",
+    "beta": "YOUR_BETA_WORKSPACE_ID"
+  }
+}

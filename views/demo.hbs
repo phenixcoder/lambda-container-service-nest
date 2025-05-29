@@ -1,0 +1,257 @@
+{{#> main title=title}}
+<div class="container">
+  <h1>{{title}}</h1>
+  <p>{{message}}</p>
+
+  <div class="demo-grid">
+    <div class="demo-card">
+      <h3>📝 Sample Form</h3>
+      <p>Test the form submission functionality with validation.</p>
+      
+      <form id="demoForm" action="/demo/submit" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+            <option value="general">General</option>
+            <option value="support">Support</option>
+            <option value="feedback">Feedback</option>
+            <option value="bug">Bug Report</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Form</button>
+      </form>
+    </div>
+
+    <div class="demo-card">
+      <h3>🔧 API Testing</h3>
+      <p>Test the sample API endpoints directly from this page.</p>
+      
+      <div class="api-test">
+        <h4>Create Sample Resource</h4>
+        <form id="apiForm">
+          <div class="form-group">
+            <label for="apiName">Name:</label>
+            <input type="text" id="apiName" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="apiDescription">Description:</label>
+            <input type="text" id="apiDescription" name="description">
+          </div>
+
+          <div class="form-group">
+            <label for="apiEmail">Email:</label>
+            <input type="email" id="apiEmail" name="email">
+          </div>
+
+          <button type="button" onclick="createSample()" class="btn btn-secondary">Create via API</button>
+        </form>
+
+        <div id="apiResult" class="api-result" style="display: none;">
+          <h5>API Response:</h5>
+          <pre id="apiResponse"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h3>🎨 Interactive Elements</h3>
+      <p>Examples of interactive JavaScript functionality.</p>
+      
+      <div class="interactive-demo">
+        <button onclick="showAlert()" class="btn btn-secondary">Show Alert</button>
+        <button onclick="changeTheme()" class="btn btn-secondary">Toggle Theme</button>
+        <button onclick="animateElement()" class="btn btn-secondary">Animate</button>
+      </div>
+
+      <div id="animationTarget" class="animation-target">
+        <img src="/bulb.png" alt="Animation Target" style="width: 50px; height: 50px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-info">
+    <h2>📚 Template Features</h2>
+    <ul>
+      <li><strong>Handlebars Templates:</strong> Server-side rendering with layouts and partials</li>
+      <li><strong>CSS Styling:</strong> Modern responsive design with custom styles</li>
+      <li><strong>JavaScript Interactivity:</strong> Client-side functionality and API calls</li>
+      <li><strong>Static Assets:</strong> Images, fonts, and other resources</li>
+      <li><strong>Form Handling:</strong> Both traditional forms and AJAX submissions</li>
+      <li><strong>API Integration:</strong> Seamless frontend-backend communication</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+async function createSample() {
+  const form = document.getElementById('apiForm');
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch('/sample', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    
+    document.getElementById('apiResponse').textContent = JSON.stringify(result, null, 2);
+    document.getElementById('apiResult').style.display = 'block';
+  } catch (error) {
+    document.getElementById('apiResponse').textContent = 'Error: ' + error.message;
+    document.getElementById('apiResult').style.display = 'block';
+  }
+}
+
+function showAlert() {
+  alert('Hello from the demo page! This is an example of JavaScript functionality.');
+}
+
+function changeTheme() {
+  document.body.classList.toggle('dark-theme');
+}
+
+function animateElement() {
+  const target = document.getElementById('animationTarget');
+  target.style.transform = 'rotate(360deg) scale(1.2)';
+  target.style.transition = 'transform 0.5s ease';
+  
+  setTimeout(() => {
+    target.style.transform = 'rotate(0deg) scale(1)';
+  }, 500);
+}
+</script>
+
+<style>
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.demo-card {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.demo-card h3 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.api-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.api-result pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+}
+
+.interactive-demo {
+  margin-bottom: 1rem;
+}
+
+.interactive-demo .btn {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.animation-target {
+  text-align: center;
+  padding: 1rem;
+}
+
+.demo-info {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.demo-info h2 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.demo-info ul {
+  margin-bottom: 0;
+}
+
+.demo-info li {
+  margin-bottom: 0.5rem;
+}
+
+.dark-theme {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+.dark-theme .demo-card,
+.dark-theme .demo-info,
+.dark-theme .api-result {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+</style>
+{{/main}}

@@ -1,0 +1,48 @@
+
+{{#> main title=title}}
+<div class="container">
+  <div class="hero-section">
+    <img src="/bulb.png" alt="Microservice Template" class="hero-image">
+    <h1>{{title}}</h1>
+    <p class="lead">{{message}}</p>
+    <p class="version">Version: {{version}}</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>🚀 NestJS Framework</h3>
+      <p>Built with the powerful NestJS framework for scalable server-side applications.</p>
+      <a href="/api" class="btn btn-primary">View API Docs</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>📊 Health Monitoring</h3>
+      <p>Built-in health checks and status monitoring for your microservice.</p>
+      <a href="/status" class="btn btn-secondary">Check Status</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>🎨 Template Views</h3>
+      <p>Handlebars templates with CSS styling and JavaScript functionality.</p>
+      <a href="/demo" class="btn btn-secondary">View Demo</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>🔧 Sample API</h3>
+      <p>Example CRUD operations with proper validation and Swagger documentation.</p>
+      <a href="/api#/sample" class="btn btn-secondary">Try API</a>
+    </div>
+  </div>
+
+  <div class="quick-start">
+    <h2>Quick Start Guide</h2>
+    <ol>
+      <li>Clone this template for your new microservice</li>
+      <li>Update the service name in <code>package.json</code></li>
+      <li>Modify the controllers and services for your business logic</li>
+      <li>Update the templates in <code>views/</code> for your UI needs</li>
+      <li>Deploy using Docker or your preferred method</li>
+    </ol>
+  </div>
+</div>
+{{/main}}

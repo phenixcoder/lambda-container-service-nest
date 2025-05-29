@@ -1,0 +1,222 @@
+{{#> main title=title}}
+<div class="container">
+  <div class="result-header">
+    <h1>{{title}}</h1>
+    <div class="success-badge">✅ Form Submitted Successfully</div>
+  </div>
+
+  <div class="result-card">
+    <h3>📋 Submitted Data</h3>
+    <div class="data-display">
+      {{#each formData}}
+      <div class="data-item">
+        <span class="data-label">{{@key}}:</span>
+        <span class="data-value">{{this}}</span>
+      </div>
+      {{/each}}
+    </div>
+
+    <div class="metadata">
+      <div class="data-item">
+        <span class="data-label">Submitted At:</span>
+        <span class="data-value">{{submittedAt}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <a href="/demo" class="btn btn-primary">Submit Another</a>
+    <a href="/" class="btn btn-secondary">Back to Home</a>
+    <button onclick="downloadData()" class="btn btn-secondary">Download JSON</button>
+  </div>
+
+  <div class="processing-info">
+    <h3>🔄 Processing Flow</h3>
+    <div class="process-steps">
+      <div class="step completed">
+        <div class="step-number">1</div>
+        <div class="step-text">Form Validation</div>
+      </div>
+      <div class="step completed">
+        <div class="step-number">2</div>
+        <div class="step-text">Data Processing</div>
+      </div>
+      <div class="step completed">
+        <div class="step-number">3</div>
+        <div class="step-text">Response Generation</div>
+      </div>
+      <div class="step completed">
+        <div class="step-number">4</div>
+        <div class="step-text">Template Rendering</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function downloadData() {
+  const data = {
+    formData: {{{json formData}}},
+    submittedAt: '{{submittedAt}}'
+  };
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'form-submission-' + new Date().getTime() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+<style>
+.result-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.success-badge {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 25px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.result-card {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.result-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #495057;
+}
+
+.data-display {
+  margin-bottom: 2rem;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.data-label {
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: capitalize;
+}
+
+.data-value {
+  color: #495057;
+  font-family: monospace;
+  background-color: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.metadata {
+  border-top: 2px solid #e9ecef;
+  padding-top: 1rem;
+}
+
+.result-actions {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.result-actions .btn {
+  margin: 0 0.5rem;
+}
+
+.processing-info {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.processing-info h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #495057;
+  text-align: center;
+}
+
+.process-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.step.completed .step-number {
+  background-color: #28a745;
+}
+
+.step-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .data-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .process-steps {
+    flex-direction: column;
+  }
+  
+  .result-actions .btn {
+    display: block;
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+}
+</style>
+{{/main}}
