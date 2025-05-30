@@ -26,10 +26,15 @@
 git clone <your-repo-url> my-microservice
 cd my-microservice
 
-# 2. Install dependencies
+# 2. Configure your project (RECOMMENDED)
+cp .lcsconf.example.json .lcsconf.json
+nano .lcsconf.json  # Edit with your project details
+./setup.sh          # Configure all template files
+
+# 3. Install dependencies
 npm install
 
-# 3. Start development server
+# 4. Start development server
 npm run start:dev
 ```
 
@@ -37,6 +42,13 @@ npm run start:dev
 - **Web UI**: http://localhost:4100
 - **API Docs**: http://localhost:4100/api-docs
 - **Health Check**: http://localhost:4100/health
+
+### ⚡ Quick Setup (Alternative)
+
+Skip configuration and use defaults:
+```bash
+npm install && npm run start:dev
+```
 
 ---
 
@@ -73,6 +85,70 @@ views/                  # Handlebars templates
 public/                # Static assets (CSS, JS, images)
 deployment/            # AWS deployment scripts
 ```
+
+---
+
+## ⚙️ Automated Setup System
+
+**🎯 Configure your entire project with one command!**
+
+The template includes an automated setup system that configures all templated parts based on your project requirements:
+
+### Quick Configuration
+
+```bash
+# 1. Copy example configuration
+cp .lcsconf.example.json .lcsconf.json
+
+# 2. Edit your project details
+nano .lcsconf.json
+
+# 3. Run automated setup
+./setup.sh
+```
+
+### What Gets Configured
+
+✅ **Project metadata** - package.json, README.md, branding  
+✅ **AWS deployment** - Account ID, regions, function names  
+✅ **Web templates** - Service name, company branding  
+✅ **Environment** - Server port, API configuration  
+✅ **Scripts** - Deployment and development scripts  
+
+### Configuration Example
+
+```json
+{
+  "project": {
+    "name": "my-payment-service",
+    "displayName": "Payment Service",
+    "description": "Secure payment processing microservice"
+  },
+  "aws": {
+    "accountId": "123456789012",
+    "region": "us-east-1"
+  },
+  "branding": {
+    "serviceName": "Payment Service",
+    "companyName": "Your Company"
+  }
+}
+```
+
+### Setup Commands
+
+```bash
+# Interactive setup with prompts
+npm run setup:interactive
+
+# Direct setup (requires .lcsconf.json)
+npm run setup
+
+# Use custom config file
+node setup.js my-config.json
+```
+
+**📖 Detailed setup documentation**: [SETUP.md](SETUP.md)
 
 ---
 
@@ -278,6 +354,7 @@ docker --version
 
 ## 📄 Additional Documentation
 
+- **[SETUP.md](SETUP.md)** - Automated setup system guide
 - **[TODO.md](TODO.md)** - Complete setup checklist
 - **[TEMPLATE_README.md](TEMPLATE_README.md)** - Detailed template documentation
 - **[TEMPLATE_SUMMARY.md](TEMPLATE_SUMMARY.md)** - Template features overview

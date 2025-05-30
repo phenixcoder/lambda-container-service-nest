@@ -1,0 +1,36 @@
+{
+  "project": {
+    "name": "my-microservice",
+    "displayName": "My Microservice",
+    "description": "A sample microservice built from the template",
+    "version": "1.0.0",
+    "author": "Your Name",
+    "repository": "https://github.com/yourorg/my-microservice"
+  },
+  "aws": {
+    "accountId": "123456789012",
+    "region": "us-east-1",
+    "lambdaFunctionName": "my-microservice-lambda",
+    "ecrRepository": "my-microservice",
+    "environments": {
+      "production": "prod-workspace-id",
+      "beta": "beta-workspace-id",
+      "development": "dev-workspace-id"
+    }
+  },
+  "branding": {
+    "serviceName": "My Microservice",
+    "companyName": "Your Company Name",
+    "logoPath": "/bulb.png",
+    "primaryColor": "#007acc"
+  },
+  "server": {
+    "port": 4100,
+    "apiPrefix": "api"
+  },
+  "features": {
+    "healthCheck": true,
+    "swagger": true,
+    "webUI": true
+  }
+}

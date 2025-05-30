@@ -1,0 +1,35 @@
+{
+  "project": {
+    "name": "test-microservice",
+    "displayName": "Test Microservice",
+    "description": "A test microservice for validating the setup system",
+    "version": "1.0.0",
+    "author": "Test User",
+    "repository": "https://github.com/test/test-microservice"
+  },
+  "aws": {
+    "accountId": "123456789012",
+    "region": "us-west-2",
+    "lambdaFunctionName": "test-microservice-lambda",
+    "ecrRepository": "test-microservice",
+    "environments": {
+      "production": "prod-test-workspace",
+      "beta": "beta-test-workspace"
+    }
+  },
+  "branding": {
+    "serviceName": "Test Microservice",
+    "companyName": "Test Company Inc.",
+    "logoPath": "/test-logo.png",
+    "primaryColor": "#ff6b35"
+  },
+  "server": {
+    "port": 4200,
+    "apiPrefix": "api/v1"
+  },
+  "features": {
+    "healthCheck": true,
+    "swagger": true,
+    "webUI": true
+  }
+}
