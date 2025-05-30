@@ -4,10 +4,10 @@ import {
   NestExpressApplication,
 } from '@nestjs/platform-express';
 import { Context, Handler } from 'aws-lambda';
-import * as express from 'express';
+import express from 'express';
 
 import { AppModule } from './app.module';
-import * as serverlessHttp from 'serverless-http';
+import serverlessHttp from 'serverless-http';
 import { NestAppInit } from './nestApp';
 
 let cachedServer: Handler;
